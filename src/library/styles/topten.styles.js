@@ -4,16 +4,18 @@ export const styles = {
         color: '#232129',
         padding: '1rem',
         fontFamily: '-apple-system, Roboto, sans-serif, serif',
+        fontSize: '1rem',
     },
     headingStyles: {
-        marginTop: 0,
-        marginBottom: 64,
-        maxWidth: 320,
+        margin: 0,
+        padding: 0,
     },
     headingAccentStyles: {
         color: '#663399',
     },
     subheadingStyles: {
+        fontSize: '1.25rem',
+        fontWeight: 600,
     },
     paragraphStyles: {
         marginBottom: 48,
@@ -26,18 +28,17 @@ export const styles = {
         borderRadius: 4,
     },
     listStyles: {
-        marginBottom: 96,
-        paddingLeft: 0,
-        listStyleType:'',
-        listStylePosition:'inside',
-        listStyleImage:'',
-
+        margin: 0,
+        padding: 0,
+        listStyle: 'none',
+        // listStyleType: 'decimal-leading-zero',
+        // listStylePosition: 'inside',
+        // listStyleImage: '',
     },
     listItemStyles: {
-        fontWeight: 300,
-        fontSize: 24,
-        maxWidth: 560,
-        marginBottom: 30,
+        // fontWeight: 300,
+        // fontSize: 24,
+        // marginBottom: 30,
     },
     linkStyle: {
         color: '#8954A8',
@@ -45,17 +46,33 @@ export const styles = {
         fontSize: 16,
         verticalAlign: '5%',
     },
+    titleStyle: {
+        color: '#232129',
+        fontSize: 18,
+        fontWeight: 600,
+        flex:'1 0 50%',
+    },
     descriptionStyle: {
         color: '#232129',
-        fontSize: 14,
-        marginTop: 10,
-        marginBottom: 0,
-        lineHeight: 1.25,
+        fontSize: 12,
+        fontWeight: 400,
+        overflow:'hidden',
+        textOverflow: 'ellipsis',
+        whiteSpace: 'nowrap',
+        maxHeight:'1rem',
     },
-    docLink: {
-        text: 'Documentation',
-        url: 'https://www.gatsbyjs.com/docs/',
-        color: '#8954A8',
+    quoteStyle: {
+        color: '#232129',
+        fontSize: 16,
+        fontWeight: 700,
+        margin:'0 0 0.75rem 0',
+    },
+    contentStyle: {
+        color: '#232129',
+        fontSize: 14,
+        margin: '1rem 0',
+        padding:0,
+        lineHeight: 1.4,
     },
     badgeStyle: {
         color: '#fff',
@@ -71,7 +88,53 @@ export const styles = {
         top: -2,
         marginLeft: 10,
         lineHeight: 1,
-    }
+    },
+    ruleDetailStyle: {
+        padding:'1rem',
+        margin:'0.5rem 0',
+    },
+    iconStyle: {
+        background:'#232129',
+        color: 'white',
+        borderRadius: '1rem',
+        minWidth:'1rem',
+        minHeight:'1rem',
+        width:'100%',
+        height:'100%',
+        display:'block',
+        textAlign: 'center',
+        padding:'0.125rem',
+        opacity:'0.5',
+        fontFamily:'serif',
+        fontSize:'0.875rem',
+    },
+    flex: {
+        display: 'flex',
+    },
+    flexCol: {
+        display: 'flex',
+        flexDirection: 'column',
+
+    },
+    flexRow: {
+        display: 'flex',
+        flexDirection: 'row',
+    },
+    flexStart: {
+        display: 'flex',
+        justifyContent: 'start',
+        alignItems: 'start',
+    },
+    flexCenter: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    flexEnd: {
+        display: 'flex',
+        justifyContent: 'end',
+        alignItems: 'end',
+    },
 }
 
 export default styles
