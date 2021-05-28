@@ -6,11 +6,34 @@ module.exports = {
         'gatsby-plugin-mdx',
         'gatsby-plugin-sharp',
         'gatsby-transformer-sharp',
+        'gatsby-transformer-json',
+        {
+            resolve: 'gatsby-transformer-json',
+            options: {
+                typeName: 'Json',
+            },
+        },
+        {
+            resolve: 'gatsby-source-filesystem',
+            options: {
+                name: 'data',
+                path: `${__dirname}/src/library/data/`,
+            },
+            __key: 'data',
+        },
+        {
+            resolve: 'gatsby-source-filesystem',
+            options: {
+                name: 'styles',
+                path: `${__dirname}/src/library/styles/`,
+            },
+            __key: 'styles',
+        },
         {
             resolve: 'gatsby-source-filesystem',
             options: {
                 name: 'images',
-                path: './src/images/',
+                path: `${__dirname}/src/images/`,
             },
             __key: 'images',
         },
@@ -18,7 +41,7 @@ module.exports = {
             resolve: 'gatsby-source-filesystem',
             options: {
                 name: 'pages',
-                path: './src/pages/',
+                path: `${__dirname}/src/pages/`,
             },
             __key: 'pages',
         },
@@ -32,23 +55,6 @@ module.exports = {
                 theme_color:'#bada55',
                 display: 'browser',
                 icon: '/src/images/favicon-32x32.png',
-                // icons:[
-                //     {
-                //         'src': 'src/images/favicon.ico',
-                //         'type': 'image/png',
-                //         'sizes': '48x48',
-                //     },
-                //     {
-                //         'src': 'src/images/favicon-16x16.png',
-                //         'type': 'image/png',
-                //         'sizes': '16x16',
-                //     },
-                //     {
-                //         'src': 'src/images/favicon-32x32.png',
-                //         'type': 'image/png',
-                //         'sizes': '32x32',
-                //     },
-                // ],
             },
         },
     ],

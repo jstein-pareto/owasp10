@@ -1,7 +1,8 @@
 /* eslint-disable react/prop-types */
 import * as React from 'react'
-import {ExpansionPanel, GridList, ParetoAlert, Typography, Tooltip} from '@paretointel/react-component-library'
+import {ExpansionPanel, GridList, Tooltip} from '@paretointel/react-component-library'
 
+import RiskDetails from '../risk-details'
 import RuleDetails from '../rule-details'
 
 import styles from '../../library/styles/topten.styles'
@@ -19,19 +20,18 @@ const ListItem = ({item={}}) => {
     return (
         <ExpansionPanel
             expanded={expanded}
-            title={<>
-                <div style={styles.titleStyle}>{id}. {title}</div>
-                {/* <div style={styles.descriptionStyle}>{description}</div> */}
-                <Tooltip display={description}><span style={styles.iconStyle}>i</span></Tooltip>
-            </>}
+            title={<span style={{...styles.flexRow, alignItems: 'center', justifyContent: 'start'}}>
+                <div style={styles.titleStyle}><span style={styles.numberStyle}>{id}</span>{title}</div>
+                {/* <Tooltip display={description}><span style={styles.iconStyle}>i</span></Tooltip> */}
+            </span>}
             onChange={handleExpansion}
         >
             <div style={{...styles.flexCol, ...styles.flexCenter}}>
-                <p style={styles.contentStyle}>{content}</p>
+                <p style={styles.paragraphStyles}>{content}</p>
                 <GridList 
                     items={[{label:'risks',id:itemId+'-risks',title,severity:'error'}]}
                     columns={{xs:1}}
-                    listItemComponent={RuleDetails}
+                    listItemComponent={RiskDetails}
                 />
                 <hr />
                 <GridList 

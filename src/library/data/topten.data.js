@@ -10,7 +10,7 @@ export const topten = {
         {
             id:'A1', 
             title: 'Injection',
-            description: 'exploit flaws in DB, OS, or LDAP config to execute foreign code',
+            description: 'exploit flaws in DB, OS, or LDAP config to execute untrusted code',
             content: 'Injection flaws, such as SQL, NoSQL, OS, and LDAP injection, occur when untrusted data is sent to an interpreter as part of a command or query. The attacker’s hostile data can trick the interpreter into executing unintended commands or accessing data without proper authorization.',
             url:'https://owasp.org/www-project-top-ten/2017/A1_2017-Injection',
             path:'A1_2017-Injection',
@@ -18,7 +18,7 @@ export const topten = {
         {
             id:'A2', 
             title: 'Broken Authentication',
-            description: 'exploit flaws in user or session config to execute foreign code',
+            description: 'exploit flaws in user or session config to execute untrusted code',
             content: 'Application functions related to authentication and session management are often implemented incorrectly, allowing attackers to compromise passwords, keys, or session tokens, or to exploit other implementation flaws to assume other users’ identities temporarily or permanently.',
             url:'https://owasp.org/www-project-top-ten/2017/A2_2017-Broken_Authentication',
             path:'A2_2017-Broken_Authentication',
@@ -34,7 +34,7 @@ export const topten = {
         {
             id:'A4', 
             title: 'XML External Entities (XXE)',
-            description: 'exploit flaws in XML processors to access proprietary data, execute foreign code, make DOS attack',
+            description: 'exploit flaws in XML processors to access proprietary data, execute untrusted code, make DOS attack',
             content: 'Many older or poorly configured XML processors evaluate external entity references within XML documents. External entities can be used to disclose internal files using the file URI handler, internal file shares, internal port scanning, remote code execution, and denial of service attacks.',
             url:'https://owasp.org/www-project-top-ten/2017/A4_2017-XML_External_Entities_(XXE)',
             path:'A4_2017-XML_External_Entities_(XXE)',
@@ -42,7 +42,7 @@ export const topten = {
         {
             id:'A5', 
             title: 'Broken Access Control',
-            description: 'exploit user role config to access (and modify) proprietary data, execute foreign code',
+            description: 'exploit user role config to access (and modify) proprietary data, execute untrusted code',
             content: 'Restrictions on what authenticated users are allowed to do are often not properly enforced. Attackers can exploit these flaws to access unauthorized functionality and/or data, such as access other users\' accounts, view sensitive files, modify other users’ data, change access rights, etc.',
             url:'https://owasp.org/www-project-top-ten/2017/A5_2017-Broken_Access_Control',
             path:'A5_2017-Broken_Access_Control',
@@ -58,8 +58,8 @@ export const topten = {
         {
             id:'A7', 
             title: 'Cross-Site Scripting (XSS)',
-            description: 'exploit lack of security to...',
-            content: 'XSS flaws occur whenever an application includes untrusted data in a new web page without proper validation or escaping, or updates an existing web page with user-supplied data using a browser API that can create HTML or JavaScript. XSS allows attackers to execute scripts in the victim’s browser which can hijack user sessions, deface web sites, or redirect the user to malicious sites.',            
+            description: 'exploit lack of external script validation to hijack sessions, websites, and redirects',
+            content: 'XSS flaws occur whenever an application includes untrusted data in a new web page without proper validation or escaping, or updates an existing web page with user-supplied data using a browser API that can create HTML or JavaScript. XSS allows attackers to execute scripts in the victim’s browser which can hijack user sessions, deface web sites, or redirect the user to malicious sites.',
             url:'https://owasp.org/www-project-top-ten/2017/A5_2017-Broken_Access_Control',
             path:'A5_2017-Broken_Access_Control',
         },

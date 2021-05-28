@@ -1,0 +1,154 @@
+{
+    "risks": {
+        "A1": {
+            "vectors": {
+                "exploitability":3,
+                "description":""
+            },
+            "weaknesses": {
+                "prevelance":2,
+                "detectability":3,
+                "description":""
+            },
+            "impacts": {
+                "technical":3,
+                "description":""
+            }
+        },
+        "A2": {
+            "vectors": {
+                "exploitability":3,
+                "description":""
+            },
+            "weaknesses": {
+                "prevelance":2,
+                "detectability":2,
+                "description":""
+            },
+            "impacts": {
+                "technical":3,
+                "description":""
+            }
+        },
+        "A3": {
+            "vectors": {
+                "exploitability":2,
+                "description":""
+            },
+            "weaknesses": {
+                "prevelance":3,
+                "detectability":2,
+                "description":""
+            },
+            "impacts": {
+                "technical":3,
+                "description":""
+            }
+        },
+        "A4": {
+            "vectors": {
+                "exploitability":2,
+                "description":""
+            },
+            "weaknesses": {
+                "prevelance":2,
+                "detectability":3,
+                "description":""
+            },
+            "impacts": {
+                "technical":3,
+                "description":""
+            }
+        },
+        "A5": {
+            "vectors": {
+                "exploitability":2,
+                "description":""
+            },
+            "weaknesses": {
+                "prevelance":2,
+                "detectability":2,
+                "description":""
+            },
+            "impacts": {
+                "technical":3,
+                "description":""
+            }
+        },
+        "A6": {
+            "vectors": {
+                "exploitability":3,
+                "description":""
+            },
+            "weaknesses": {
+                "prevelance":3,
+                "detectability":3,
+                "description":""
+            },
+            "impacts": {
+                "technical":2,
+                "description":""
+            }
+        },
+        "A7": {
+            "vectors": {
+                "exploitability":3,
+                "description":""
+            },
+            "weaknesses": {
+                "prevelance":3,
+                "detectability":3,
+                "description":""
+            },
+            "impacts": {
+                "technical":2,
+                "description":""
+            }
+        },
+        "A8": {
+            "vectors": {
+                "exploitability":1,
+                "description":""
+            },
+            "weaknesses": {
+                "prevelance":2,
+                "detectability":2,
+                "description":""
+            },
+            "impacts": {
+                "technical":3,
+                "description":""
+            }
+        },
+        "A9": {
+            "vectors": {
+                "exploitability":2,
+                "description":""
+            },
+            "weaknesses": {
+                "prevelance":3,
+                "detectability":2,
+                "description":""
+            },
+            "impacts": {
+                "technical":2,
+                "description":""
+            }
+        },
+        "A10": {
+            "vectors": {
+                "exploitability":2,
+                "description":""
+            },
+            "weaknesses": {
+                "prevelance":3,
+                "detectability":1,
+                "description":""
+            },
+            "impacts": {
+                "technical":2,
+                "description":""
+            }
+        }
+    }
+}
