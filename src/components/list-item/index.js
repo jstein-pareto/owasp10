@@ -1,52 +1,43 @@
 /* eslint-disable react/prop-types */
-import * as React from 'react'
-import {ExpansionPanel, GridList, Tooltip} from '@paretointel/react-component-library'
+import React, { useState } from 'react'
+import { ExpansionPanel } from '@paretointel/react-component-library'
 
-import RiskDetails from '../risk-details'
-import RuleDetails from '../rule-details'
+import RiskGrid from '../risk-grid'
+import LinkOutbound from '../link-outbound'
 
 import styles from '../../library/styles/topten.styles'
 
 const ListItem = ({item={}}) => {
-    const {id='',
+    console.log('item: ',item)
+    const {
+        rank='',
         title='',
         description='',
-        content=''} = item
-    const [expanded, setExpanded] = React.useState(id==='A1')
+        content='',
+        url='',
+        risks={},
+    } = item
+    console.log('risks: ',risks)
+    const [expanded, setExpanded] = useState(rank===2)
     function handleExpansion () {
         setExpanded(!expanded)
     }
-    const itemId = id+'-item'
+    // const itemId = rank+'-item'
     return (
         <ExpansionPanel
             expanded={expanded}
             title={<span style={{...styles.flexRow, alignItems: 'center', justifyContent: 'start'}}>
-                <div style={styles.titleStyle}><span style={styles.numberStyle}>{id}</span>{title}</div>
-                {/* <Tooltip display={description}><span style={styles.iconStyle}>i</span></Tooltip> */}
+                <div style={styles.titleStyle}><span style={styles.numberStyle}>{rank}</span>{title}</div>
             </span>}
             onChange={handleExpansion}
         >
             <div style={{...styles.flexCol, ...styles.flexCenter}}>
+                <blockquote style={{fontSize:'1.5rem',padding:'0.875em 1.25rem',margin:'0',background:'lightblue',borderRadius:'1rem'}}>{description}</blockquote>
                 <p style={styles.paragraphStyles}>{content}</p>
-                <GridList 
-                    items={[{label:'risks',id:itemId+'-risks',title,severity:'error'}]}
-                    columns={{xs:1}}
-                    listItemComponent={RiskDetails}
-                />
-                <hr />
-                <GridList 
-                    items={[
-                        {label:'vulnerability',id:itemId+'-vulnerability',title,severity:'warning'},
-                        {label:'prevention',id:itemId+'-prevention',title,severity:'success'},
-                        {label:'scenarios',id:itemId+'-scenarios',title},
-                        {label:'references',id:itemId+'-references',title},
-                    ]}
-                    columns={{xs:1,sm:2,md:4}}
-                    listItemComponent={RuleDetails}
-                />
+                <LinkOutbound text={'read more...'} tooltip={'opens new browser window/tab'} url={url}/>
+                <RiskGrid rank={rank} />
             </div>
         </ExpansionPanel>
-
     )
 }
 

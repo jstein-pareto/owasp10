@@ -1,12 +1,13 @@
 // styles
 export const styles = {
+    reset: {
+        margin: 0,
+        padding: 0,
+    },
     pageStyles: {
         color: '#232129',
-        // backgroundColor: 'papayawhip',
         margin: 0,
         padding: '1rem',
-        // fontFamily: '-apple-system, Roboto, sans-serif, serif',
-        // fontSize: '1rem',
     },
     gridStyle: {
         backgroundColor:'lightgreen',
@@ -15,14 +16,6 @@ export const styles = {
         margin: 0,
         padding: '0 1rem 1rem',
 
-    },
-    headingGroupStyle: {
-        margin: 0,
-        padding: '0 1rem',
-    },
-    headingStyles: {
-        margin: 0,
-        padding: 0,
     },
     headingAccentStyles: {
         color: '#663399',
@@ -46,8 +39,6 @@ export const styles = {
         borderRadius: 4,
     },
     listStyles: {
-        margin: 0,
-        padding: 0,
         listStyle: 'none',
         // listStyleType: 'decimal-leading-zero',
         // listStylePosition: 'inside',
@@ -68,7 +59,6 @@ export const styles = {
         color: '#232129',
         fontSize: 18,
         fontWeight: 600,
-        // flex: '1 0 50%',
         margin:'0 1rem 0 0',
     },
     descriptionStyle: {
@@ -132,10 +122,6 @@ export const styles = {
         textAlign: 'center',
         padding: '0.25rem',
         margin: '0 1rem 0 0',
-        // opacity: '0.5',
-        // fontFamily: 'sans-serif',
-        // fontSize: '0.875rem',
-
     },
     flex: {
         display: 'flex',

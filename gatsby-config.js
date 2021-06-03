@@ -54,7 +54,7 @@ module.exports = {
                 background_color:'#ffffff',
                 theme_color:'#bada55',
                 display: 'browser',
-                icon: '/src/images/favicon-32x32.png',
+                icon: './src/images/favicon-32x32.png',
             },
         },
     ],

@@ -2,8 +2,10 @@
 import * as React from 'react'
 import {Grid} from '@paretointel/react-component-library'
 
+import Layout from '../components/layout'
 import TopTenSummary from '../components/graphql/top-ten-summary'
-import TopTenDetails from '../components/graphql/top-ten-details'
+import TopTenList from '../components/graphql/top-ten-list'
+// import TopTenRisks from '../components/graphql/top-ten-risks'
 // import GridTest from '../components/grid-test'
 
 import styles from '../library/styles/topten.styles'
@@ -12,14 +14,17 @@ import styles from '../library/styles/topten.styles'
 
 const HomePage = () => {
     return (
-        <main style={styles.pageStyles}>
-            <title>OWASP Top Ten - 2017</title>
-            <Grid items={[
-                {content:<TopTenSummary key='grid-summary' id='grid-summary' />,columns:{xs:12}},
-                {content:<TopTenDetails key='grid-details' id='grid-details' />,columns:{xs:12}},
-                // {content:<GridTest key='grid-test' id='grid-test' />,columns:{xs:12}},
-            ]} />
-        </main>
+        <Layout>
+            <main style={styles.pageStyles}>
+                <title>OWASP Top Ten - 2017</title>
+                {/* <TopTenRisks /> */}
+                <Grid items={[
+                    {content: <TopTenSummary key='grid-summary' id='grid-summary' />,columns: {xs:12}},
+                    {content: <TopTenList key='grid-details' id='grid-details' />,columns: {xs:12}},
+                    // {content: <GridTest key='grid-test' id='grid-test' />,columns:{xs:12}},
+                ]} />
+            </main>
+        </Layout>
     )
 }
 
