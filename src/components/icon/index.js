@@ -3,11 +3,11 @@ import React from 'react'
 import { FiExternalLink } from 'react-icons/fi'
 import { Tooltip } from '@paretointel/react-component-library'
 
-export const LinkOutbound = ({text='',tooltip='',url=''}) => {
+export const Icon = ({text='',tooltip=''}) => {
 
     return (<div style={{position:'relative'}}>
         <span>{text}</span>
-        <span style={{marginLeft:'0.25rem', position:'absolute', top:'50%', transform:'translateY(-50%)'}} onClick={() => window.open(url)}>
+        <span>
             <Tooltip display={tooltip}>
                 <FiExternalLink color="#0093b2" size={20} />
             </Tooltip>
@@ -15,4 +15,4 @@ export const LinkOutbound = ({text='',tooltip='',url=''}) => {
     </div>)
 }
 
-export default LinkOutbound
+export default Icon

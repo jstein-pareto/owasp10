@@ -37,7 +37,7 @@ const TopTenSummary = () => {
                 <p>
                     {description}
                 </p>
-                <LinkOutbound text={'read more...'} tooltip={textOWASP} url={urlOWASP} />
+                <LinkOutbound text={'read more'} tooltip={textOWASP} url={urlOWASP} />
             </div>)
         })}
     </>

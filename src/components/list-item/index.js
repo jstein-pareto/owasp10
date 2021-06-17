@@ -8,7 +8,7 @@ import LinkOutbound from '../link-outbound'
 import styles from '../../library/styles/topten.styles'
 
 const ListItem = ({item={}}) => {
-    console.log('item: ',item)
+    // console.log('item: ',item)
     const {
         rank='',
         title='',
@@ -17,7 +17,7 @@ const ListItem = ({item={}}) => {
         url='',
         risks={},
     } = item
-    console.log('risks: ',risks)
+    // console.log('risks: ',risks)
     const [expanded, setExpanded] = useState(rank===2)
     function handleExpansion () {
         setExpanded(!expanded)
@@ -34,8 +34,8 @@ const ListItem = ({item={}}) => {
             <div style={{...styles.flexCol, ...styles.flexCenter}}>
                 <blockquote style={{fontSize:'1.5rem',padding:'0.875em 1.25rem',margin:'0',background:'lightblue',borderRadius:'1rem'}}>{description}</blockquote>
                 <p style={styles.paragraphStyles}>{content}</p>
-                <LinkOutbound text={'read more...'} tooltip={'opens new browser window/tab'} url={url}/>
-                <RiskGrid rank={rank} />
+                <LinkOutbound text={'read more'} tooltip={'opens new browser window/tab'} url={url}/>
+                <RiskGrid rank={rank} risks={risks} />
             </div>
         </ExpansionPanel>
     )

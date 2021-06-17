@@ -1,42 +1,12 @@
 /* eslint-disable react/prop-types */
 import * as React from 'react'
 import styled from 'styled-components'
+// import { FiInfo } from 'react-icons/fi'
+// import { Tooltip } from '@paretointel/react-component-library'
 
-const styles={
-    heading:{
-        display: 'flex',
-        flexFlow: 'row nowrap',
-        margin: '0',
-        padding: '1rem 1rem 0 1rem',
-    },
-    label: {
-        fontWeight: '700', 
-        fontSize: '0.75em', 
-        display: 'none',
-    },
-    tableLabel: {
-    },
-}
+import styles from './risk-grid.styles'
 
-/* grid */
-export const Grid = styled.div`
-    display: grid;
-    // justify-items: stretch;
-    // align-items: stretch;
-    // justify-content: stretch;
-    // align-content: stretch;
-    grid-template-columns: auto repeat(6, 1fr);
-    grid-template-rows: auto repeat(6, auto);
-    column-gap: 3px;
-    row-gap: 3px;
-    grid-template-areas:
-        'label-name'
-        'label-severity'
-        'label-description;
-    margin: 0;
-    padding: 1rem;
-    background:rgba(255,127,0,0.125);
-`
+/* grid elements */
 export const GridRow = styled.div``
 export const GridCol = styled.div``
 /* grid rows */
@@ -50,26 +20,31 @@ export const GridColLabels = styled(GridCol)`
     background:rgba(127,127,127,0.5);
 `
 export const GridColVectors = styled(GridCol)`
-grid-area:'GridColVectors';
-background:rgba(255,127,0,0.5);`
+    grid-area:'GridColVectors';
+    background:rgba(255,0,0,0.5);
+`
 export const GridColWeaknesses = styled(GridCol)`
-grid-area:'GridColVectors';
-background:rgba(255,127,0,0.5);`
+    grid-area:'GridColVectors';
+    background:rgba(0,0,255,0.5);
+`
 export const GridColImpacts = styled(GridCol)`
-grid-area:'GridColVectors';
-background:rgba(255,127,0,0.5);`
+    grid-area:'GridColVectors';
+    background:rgba(0,255,0,0.5);
+`
 
 /* grid cells */
-export const GridCells = styled.div``
 export const GridCell = styled.div`
-    background:rgba(127,127,127,0.25);
-    padding:0.5rem;
+    // background: rgba(127,127,255,0.25);
+    padding: 0.5rem;
+    margin:0;
+    text-align: center;
+    vertical-align: middle;
 `
 export const GridColHeader = styled(GridCell)`
     background:rgba(127,255,127,0.5)
 `
 export const GridRowHeader = styled(GridCell)`
-    background: rgba(127,127,127,0.75);
+    background: rgba(255,127,127,0.75);
     color: white;
     font-weight: 400;
     font-size: 0.875em;
@@ -77,47 +52,72 @@ export const GridRowHeader = styled(GridCell)`
     letter-spacing: 1px;
     text-align: right;
 `
-export const GridCellType = styled(GridCell)`
-    background:rgba(127,255,127,0.25);
-`
-export const GridCellName = styled(GridCell)`
-    background:rgba(255,127,127,0.25);
+export const RiskItemLabel = styled(GridCell)`
+    font-size:1.125rem;
+    font-weight:500;
 `
 export const GridCellSeverity = styled(GridCell)`
-    background:rgba(127,127,255,0.25);
+    font-size:1.5rem;
+    font-weight:700;
+    background-color: black;
+    color: white;
+    &:before {
+        font-size:1rem;
+        font-weight:500;
+        content:'severity: ';
+    }
 `
-export const GridCellDescription = styled(GridCell)``
-
-const RiskListItem = ({ label, type, severity, description }) => {
+export const GridCellDescription = styled(GridCell)`
+    font-size:0.75rem;
+    font-weight:300;
+    text-align: left;
+    vertical-align: top;
+    height: 100%;
+    // max-height: 2.5rem;
+    // overflow: hidden;
+    // display: -webkit-box;
+    // -webkit-line-clamp: 3;
+    // -webkit-box-orient: vertical;
+    background-color: rgba(255,255,255,0.5);
+`
+const RiskItem = (props) => {
+    console.log('props: ',props)
+    const { label, severity, description, count=1 } = props
     return (
-        <>
-            {/* <GridCellType style={{gridArea:`${label}-type`}}>{type||'n/a'}</GridCellType> */}
-            <GridCellName style={{gridArea:`${label}-name`}}>{label||'n/a'}</GridCellName>
-            <GridCellSeverity style={{gridArea:`${label}-severity`}}>{severity||'n/a'}</GridCellSeverity>
+        <div style={{...styles.riskItem, width:`${100/count}%`, ...styles[`severity${severity}`]}}>
+            <RiskItemLabel style={{gridArea:`${label}-name`}}>
+                {label||'n/a'}
+            </RiskItemLabel>
+            <GridCellSeverity style={{gridArea:`${label}-severity`}}><span style={{...styles.severity}}>{severity||'n/a'}</span></GridCellSeverity>
             <GridCellDescription style={{gridArea:`${label}-description`}}>{description||'n/a'}</GridCellDescription>
-        </>
+        </div>
     )
 }
 
-const Vectors = () => {
-    return <div>Vectors</div>
-}
-const Weaknesses = () => {
-    return <div>Weaknesses</div>
-}
-const Impacts = () => {
-    return <div>Impacts</div>
+const RiskGroup = ({items=[],type=''}) => {
+    if (!items) return null
+    const count = items.length || 1
+    return <div style={styles.riskGroup}>
+        <h3 style={styles.riskGroupLabel}>{type}</h3>
+        <div style={styles.riskTypes}>
+            {items.map((item={},i)=>{
+                console.log('item: ',item)
+                return (<RiskItem key={`vectors-${i}`} {...item} count={count} />)
+            })}
+        </div>
+    </div>
 }
 
-const RiskGrid = ({rank, risks}) => {
+const RiskGrid = ({risks={}}) => {
 
-    console.log(risks)
-    return <>
-        {/* <pre>{rank}: {JSON.stringify(risks, null, 4)}</pre> */}
-        <Vectors />
-        <Weaknesses />
-        <Impacts />
-    </>
+    // console.log(risks)
+    const {vectors=[],weaknesses=[],impacts=[]} = risks
+
+    return (<div style={{...styles.riskGrid}}>
+        <RiskGroup type='Vectors' items={vectors} />
+        <RiskGroup type='Weaknesses' items={weaknesses} />
+        <RiskGroup type='Impacts' items={impacts} />
+    </div>)
 
     // const {id='',title='',ratings=[]}=item
     // const columnSize = 100/ratings.length+'%'
@@ -138,7 +138,7 @@ const RiskGrid = ({rank, risks}) => {
     //     {/* START heading column */}
     //     {['type','name','severity','description'].map(heading => <GridRowHeader key={`label-${heading}`} style={{gridArea:`label-${heading}`}}><div style={styles.tableLabel}>{heading}</div></GridRowHeader>)}
     //     {/* START content columns */}
-    //     {ratings.map(({label,type,severity,description},j) => <RiskListItem key={`risk-ratings--${j}`} label={label} type={type} severity={severity} description={description} size={columnSize} />)}
+    //     {ratings.map(({label,type,severity,description},j) => <RiskItem key={`risk-ratings--${j}`} label={label} type={type} severity={severity} description={description} size={columnSize} />)}
     //     {/* </Grid> */}
     //     <hr />
     // </div>)
