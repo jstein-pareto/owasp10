@@ -1,37 +1,22 @@
 /* eslint-disable react/prop-types */
 import * as React from 'react'
 import styled from 'styled-components'
+import { useStaticQuery, graphql } from 'gatsby'
 // import { FiInfo } from 'react-icons/fi'
 // import { Tooltip } from '@paretointel/react-component-library'
 
 import styles from './risk-grid.styles'
 
-/* grid elements */
-export const GridRow = styled.div``
-export const GridCol = styled.div``
-/* grid rows */
-export const GridRowType = styled(GridRow)`
-    grid-area:'label-type';
-    background:rgba(255,0,0,0.5);
-`
-/* grid cols */
-export const GridColLabels = styled(GridCol)`
-    grid-area:'col-labels';
-    background:rgba(127,127,127,0.5);
-`
-export const GridColVectors = styled(GridCol)`
-    grid-area:'GridColVectors';
-    background:rgba(255,0,0,0.5);
-`
-export const GridColWeaknesses = styled(GridCol)`
-    grid-area:'GridColVectors';
-    background:rgba(0,0,255,0.5);
-`
-export const GridColImpacts = styled(GridCol)`
-    grid-area:'GridColVectors';
-    background:rgba(0,255,0,0.5);
-`
+const labels = {
+    vector: 'vector',
+    weakness: 'weakness',
+    impact: 'impact',
 
+}
+
+/* grid elements */
+/* grid rows */
+/* grid cols */
 /* grid cells */
 export const GridCell = styled.div`
     // background: rgba(127,127,255,0.25);
@@ -53,8 +38,10 @@ export const GridRowHeader = styled(GridCell)`
     text-align: right;
 `
 export const RiskItemLabel = styled(GridCell)`
-    font-size:1.125rem;
-    font-weight:500;
+    font-size:1.25rem;
+    font-weight:600;
+    // margin: 0;
+    padding: 0.25rem;
 `
 export const GridCellSeverity = styled(GridCell)`
     font-size:1.5rem;
@@ -68,41 +55,40 @@ export const GridCellSeverity = styled(GridCell)`
     }
 `
 export const GridCellDescription = styled(GridCell)`
-    font-size:0.75rem;
-    font-weight:300;
+    font-size: 0.75rem;
+    font-weight: 300;
     text-align: left;
     vertical-align: top;
     height: 100%;
-    // max-height: 2.5rem;
-    // overflow: hidden;
-    // display: -webkit-box;
-    // -webkit-line-clamp: 3;
-    // -webkit-box-orient: vertical;
     background-color: rgba(255,255,255,0.5);
 `
 const RiskItem = (props) => {
-    console.log('props: ',props)
-    const { label, severity, description, count=1 } = props
+    // console.log('props: ',props)
+    const { label, severity, description, count=1, type } = props
     return (
         <div style={{...styles.riskItem, width:`${100/count}%`, ...styles[`severity${severity}`]}}>
             <RiskItemLabel style={{gridArea:`${label}-name`}}>
-                {label||'n/a'}
+                <div style={{textTransform:'lowercase'}}>{type}<br />{label||'n/a'}</div>
             </RiskItemLabel>
-            <GridCellSeverity style={{gridArea:`${label}-severity`}}><span style={{...styles.severity}}>{severity||'n/a'}</span></GridCellSeverity>
+            <GridCellSeverity style={{gridArea:`${label}-severity`, ...styles.severity}}><span style={{}}>{severity||'?'}</span></GridCellSeverity>
             <GridCellDescription style={{gridArea:`${label}-description`}}>{description||'n/a'}</GridCellDescription>
         </div>
     )
 }
 
-const RiskGroup = ({items=[],type=''}) => {
+const RiskGroup = ({items=[],type='',common}) => {
+    console.log(type)
+    console.log(common)
     if (!items) return null
+    // if (common && type===labels.vector) items.unshift(common)
+    // if (common && type===labels.impact) items.push(common)
     const count = items.length || 1
     return <div style={styles.riskGroup}>
-        <h3 style={styles.riskGroupLabel}>{type}</h3>
+        {/* <h4 style={styles.riskGroupLabel}>{type}</h4> */}
         <div style={styles.riskTypes}>
             {items.map((item={},i)=>{
-                console.log('item: ',item)
-                return (<RiskItem key={`vectors-${i}`} {...item} count={count} />)
+                // console.log('item: ',item)
+                return (<RiskItem key={`vectors-${i}`} {...item} count={count} type={type} />)
             })}
         </div>
     </div>
@@ -110,38 +96,35 @@ const RiskGroup = ({items=[],type=''}) => {
 
 const RiskGrid = ({risks={}}) => {
 
+    const {allDataJson={}} = useStaticQuery(graphql`{
+        allDataJson {
+            nodes {
+                commonImpacts {
+                    severity
+                    label
+                    description
+                }
+                commonVectors {
+                    description
+                    label
+                    severity
+                }
+            }
+        }
+    }`)
+
     // console.log(risks)
     const {vectors=[],weaknesses=[],impacts=[]} = risks
 
+    const commonVectors = allDataJson?.nodes?.[0]?.commonVectors || {}
+    const commonImpacts = allDataJson?.nodes?.[0]?.commonImpacts || {}
+
     return (<div style={{...styles.riskGrid}}>
-        <RiskGroup type='Vectors' items={vectors} />
-        <RiskGroup type='Weaknesses' items={weaknesses} />
-        <RiskGroup type='Impacts' items={impacts} />
+        <RiskGroup type={labels.vector} items={vectors} common={commonVectors} />
+        <RiskGroup type={labels.weakness} items={weaknesses} />
+        <RiskGroup type={labels.impact} items={impacts} common={commonImpacts} />
     </div>)
 
-    // const {id='',title='',ratings=[]}=item
-    // const columnSize = 100/ratings.length+'%'
-    // return (<div key={id}>
-    //     <h3 style={{...styles.heading}}>{id} - {title}</h3>
-    //     {/* <Grid> */}
-    //     {/* START header row for column labels */}
-    //     {/* {['labels', 'agent', 'exploitability', 'prevelance', 'detectability', 'technical', 'business'].map(heading => <GridColHeader key={`col-${heading}`} style={{gridArea:`col-${heading}`}}><div style={styles.tableLabel}>{heading}</div></GridColHeader>)} */}
-    //     {/* START row colors */}
-    //     {['type','name','severity','description']
-    //         .map(heading => <GridRow key={`row-${heading}`} style={{gridArea:`row-${heading}`}} />)}
-    //     {/* START columns colors */}
-    //     {/* {['agent', 'exploitability', 'prevelance', 'detectability', 'technical', 'business']
-    //             .map(heading => <GridCol key={`col-${heading}`} style={{gridArea:`col-${heading}`}} />)} */}
-    //     <GridColVectors key={'GridColVectors'} />
-    //     <GridColWeaknesses key={'GridColWeaknesses'} />
-    //     <GridColImpacts key={'GridColImpacts'} />
-    //     {/* START heading column */}
-    //     {['type','name','severity','description'].map(heading => <GridRowHeader key={`label-${heading}`} style={{gridArea:`label-${heading}`}}><div style={styles.tableLabel}>{heading}</div></GridRowHeader>)}
-    //     {/* START content columns */}
-    //     {ratings.map(({label,type,severity,description},j) => <RiskItem key={`risk-ratings--${j}`} label={label} type={type} severity={severity} description={description} size={columnSize} />)}
-    //     {/* </Grid> */}
-    //     <hr />
-    // </div>)
 }
 
 export default RiskGrid

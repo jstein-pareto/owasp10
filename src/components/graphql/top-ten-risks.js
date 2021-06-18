@@ -2,10 +2,10 @@
 import * as React from 'react'
 import { useStaticQuery, graphql } from 'gatsby'
 
-import ListItem from '../list-item'
-import RiskGrid from '../risk-details'
+// import ListItem from '../list-item'
+// import RiskGrid from '../risk-details'
 
-import styles from '../../library/styles/topten.styles'
+// import styles from '../../library/styles/topten.styles'
 
 const TopTenRisks = () => {
 
